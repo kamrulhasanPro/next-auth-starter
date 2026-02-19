@@ -3,9 +3,16 @@ import { FaReact } from "react-icons/fa";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { SiMongodb } from "react-icons/si";
 import Link from "next/link";
-export default function Home() {
+import LoginButton from "@/components/LoginButton";
+import UserCard from "@/components/UserCard";
+import { getServerSession } from "next-auth";
+export default async function Home() {
+  const session = await getServerSession();
+  console.log(session);
   return (
     <div className="min-h-screen relative flex flex-col justify-center items-center gap-5 ">
+      <UserCard />
+
       <div className=" flex gap-5 space-x-4 items-center">
         <FaReact
           size={40}
@@ -19,10 +26,20 @@ export default function Home() {
         <h2 className="text-5xl">NEXT AUTH</h2>
       </div>
       <div className="flex gap-5">
-        <button className="btn">Login</button>
-        <Link href={"/register"} className="btn">
-          Register
-        </Link>
+        {/* Login & logout */}
+        <LoginButton />
+
+        {/* register */}
+        {!session && (
+          <Link href={"/register"} className="btn">
+            Register
+          </Link>
+         )}
+      </div>
+
+      <div>
+        <h3 className="text-2xl font-semibold">User - client</h3>
+        <p className="p-2 border-white border-2">{JSON.stringify(session)}</p>
       </div>
     </div>
   );
