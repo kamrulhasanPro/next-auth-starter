@@ -1,5 +1,5 @@
-import dns from "node:dns/promises"
-dns.setServers(["1.1.1.1", "8.8.8.8"])
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.MONGODB_URI;
@@ -13,6 +13,10 @@ const client = new MongoClient(uri, {
   },
 });
 
-export const dbConnect = async(cname) => {
+export const collections = {
+  USER: "users",
+};
+
+export const dbConnect = async (cname) => {
   return client.db(db).collection(cname);
 };
