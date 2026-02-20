@@ -6,6 +6,7 @@ import Link from "next/link";
 import LoginButton from "@/components/LoginButton";
 import UserCard from "@/components/UserCard";
 import { getServerSession } from "next-auth";
+import LogoutButton from "@/components/LogoutButton";
 export default async function Home() {
   const session = await getServerSession();
   console.log(session);
@@ -27,14 +28,20 @@ export default async function Home() {
       </div>
       <div className="flex gap-5">
         {/* Login & logout */}
-        <LoginButton />
+        {/* <LoginButton /> */}
+        <LogoutButton />
 
         {/* register */}
         {!session && (
-          <Link href={"/register"} className="btn">
-            Register
-          </Link>
-         )}
+          <>
+            <Link href={"/login"} className="btn">
+              Login Form
+            </Link>
+            <Link href={"/register"} className="btn">
+              Register
+            </Link>
+          </>
+        )}
       </div>
 
       <div>

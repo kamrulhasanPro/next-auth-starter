@@ -39,7 +39,7 @@ export async function proxy(req) {
 
   // authentication login and redirect login page
   if (!isAuthenticate && isPrivate) {
-    const redirect = new URL("/api/auth/signin", req.url);
+    const redirect = new URL("/login", req.url);
     redirect.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(redirect);
   }
