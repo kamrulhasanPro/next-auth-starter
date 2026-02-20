@@ -22,7 +22,6 @@ export async function registerUser(payload) {
   const newUser = {
     ...payload,
     createdAt: new Date().toISOString(),
-    role: "user",
     password: hashPassword,
   };
 
@@ -33,6 +32,11 @@ export async function registerUser(payload) {
     return {
       success: true,
       message: `Successfully created user on ${result.insertedId}`
+    };
+  }else{
+    return {
+      success: false,
+      message: `Something is want to wrong`
     };
   }
 

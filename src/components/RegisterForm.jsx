@@ -3,7 +3,7 @@
 import { registerUser } from "@/actions/server/auth";
 
 const RegisterForm = () => {
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -15,10 +15,11 @@ const RegisterForm = () => {
       password: form.password.value,
       image: form.image.value,
       bloodgroup: form.bloodgroup.value,
+      role: form.role.value,
     };
 
     const result = await registerUser(formData);
-    alert(JSON.stringify(result))
+    alert(JSON.stringify(result));
     console.log(result);
     // console.log("Submitted Data:", formData);
   };
@@ -103,6 +104,19 @@ const RegisterForm = () => {
           placeholder="https://example.com/image.jpg"
           className={inputClass}
         />
+      </div>
+
+      {/* Your Role */}
+      <div className="flex flex-col space-y-1">
+        <label>Your Role</label>
+        <select name="role" required className={inputClass}>
+          <option value="" disabled>
+            Select
+          </option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+          <option value="seller">Seller</option>
+        </select>
       </div>
 
       {/* Submit */}
